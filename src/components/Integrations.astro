@@ -1,0 +1,40 @@
+---
+import Container from "./Container.astro"
+
+const providers = [
+    {
+        name: "AdsPower",
+        logo: "/images/clients/adspower.svg",
+    },
+    {
+        name: "MoreLogin",
+        logo: "/images/clients/morelogin.svg",
+    },
+    {
+        name: "GoLogin",
+        logo: "/images/clients/gologin.svg",
+    },
+];
+---
+
+<div class="py-12">
+    <Container>
+        <div class="text-center">
+            <p class="text-sm font-medium uppercase tracking-widest text-gray-500 dark:text-gray-400">
+                Works with your anti-detect browser
+            </p>
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-8 md:gap-16">
+                {providers.map((provider) => (
+                    <div class="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300">
+                        <img
+                            src={provider.logo}
+                            alt={provider.name}
+                            class="h-8 md:h-10 w-auto"
+                            loading="lazy"
+                        />
+                    </div>
+                ))}
+            </div>
+        </div>
+    </Container>
+</div>

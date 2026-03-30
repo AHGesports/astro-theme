@@ -1,0 +1,88 @@
+---
+import Container from "./Container.astro"
+
+const personas = [
+    {
+        title: "Botters",
+        subtitle: "Sneaker cooks, ticket scalpers, account farmers",
+        gradient: "from-orange-500 to-red-500",
+        points: [
+            "Run hundreds of accounts with unique fingerprints",
+            "Human-like checkout behavior that beats anti-bot systems",
+            "Schedule drops and launches down to the second",
+            "Auto-rotate proxies and identities per profile",
+        ],
+    },
+    {
+        title: "Web Scrapers",
+        subtitle: "Price trackers, data collectors, market researchers",
+        gradient: "from-emerald-500 to-teal-500",
+        points: [
+            "Scrape at scale without triggering CAPTCHAs",
+            "Monitor thousands of product pages on schedule",
+            "Extract structured data with AI — no selectors needed",
+            "Rotate fingerprints to avoid IP-based rate limits",
+        ],
+    },
+    {
+        title: "Growth Hackers",
+        subtitle: "Social media managers, outreach specialists, marketers",
+        gradient: "from-blue-500 to-indigo-500",
+        points: [
+            "Manage 50+ social accounts from one dashboard",
+            "Personalized outreach across LinkedIn, Twitter, Instagram",
+            "Automated engagement with human-like interaction patterns",
+            "Schedule content and campaigns across all profiles",
+        ],
+    },
+    {
+        title: "Power Users",
+        subtitle: "Multi-account managers, personal automation enthusiasts",
+        gradient: "from-violet-500 to-purple-500",
+        points: [
+            "Automate any repetitive browser task in plain English",
+            "Build workflows that chain complex multi-step processes",
+            "Run personal tasks across multiple accounts safely",
+            "No coding needed — if you can describe it, Elyt can do it",
+        ],
+    },
+];
+---
+
+<div class="py-20">
+    <Container>
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-sm font-medium uppercase tracking-widest text-primary">Built For</span>
+            <h2 class="mt-4 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl">
+                Who uses Elyt?
+            </h2>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2">
+            {personas.map((persona) => (
+                <div class="group relative overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-gray-600/10">
+                    <!-- Gradient accent bar -->
+                    <div class={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${persona.gradient}`}></div>
+
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mt-2">
+                        {persona.title}
+                    </h3>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                        {persona.subtitle}
+                    </p>
+
+                    <ul class="mt-6 space-y-3">
+                        {persona.points.map((point) => (
+                            <li class="flex items-start gap-3 text-gray-600 dark:text-gray-400">
+                                <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>{point}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
+    </Container>
+</div>

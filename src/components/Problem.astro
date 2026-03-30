@@ -1,0 +1,65 @@
+---
+import Container from "./Container.astro"
+
+const problems = [
+    {
+        number: "01",
+        title: "One Browser. One Account. That's It.",
+        description: "Every AI automation tool on the market controls a single browser. Need to run tasks across dozens or hundreds of accounts? You're on your own.",
+        image: "/Elyt/images/poster.webp",
+    },
+    {
+        number: "02",
+        title: "Detected in Minutes. Banned in Hours.",
+        description: "AI bots move like robots — identical timing, pixel-perfect clicks, zero behavioral variation. Modern anti-bot systems catch them instantly.",
+        image: "/Elyt/images/poster.webp",
+    },
+    {
+        number: "03",
+        title: "Simple Prompts. No Real Workflows.",
+        description: 'Competitors let you type a prompt and hope for the best. No chaining tasks. No scheduling. No conditional logic. Just "do this one thing, once."',
+        image: "/Elyt/images/poster.webp",
+    },
+];
+---
+
+<div class="py-20">
+    <Container>
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-sm font-medium uppercase tracking-widest text-secondary">The Problem</span>
+            <h2 class="mt-4 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl">
+                Why current AI automation tools fail
+            </h2>
+        </div>
+
+        <div class="space-y-8 lg:space-y-6">
+            {problems.map((problem, i) => (
+                <div class:list={[
+                    "group relative overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 transition hover:shadow-2xl hover:shadow-gray-600/10",
+                    "lg:flex lg:items-center",
+                    i % 2 === 1 ? "lg:flex-row-reverse" : ""
+                ]}>
+                    <!-- Image side -->
+                    <div class="lg:w-1/2 overflow-hidden">
+                        <img
+                            src={problem.image}
+                            alt={problem.title}
+                            class="w-full h-56 lg:h-80 object-cover transition duration-500 group-hover:scale-105"
+                            loading="lazy"
+                        />
+                    </div>
+                    <!-- Content side -->
+                    <div class="lg:w-1/2 p-8 lg:p-12">
+                        <span class="text-6xl font-extrabold text-gray-100 dark:text-gray-800">{problem.number}</span>
+                        <h3 class="mt-4 text-xl font-bold text-gray-900 dark:text-white md:text-2xl">
+                            {problem.title}
+                        </h3>
+                        <p class="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+                            {problem.description}
+                        </p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </Container>
+</div>

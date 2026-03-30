@@ -1,0 +1,103 @@
+---
+import Container from "./Container.astro"
+
+const features = [
+    "Mass Profile Orchestration",
+    "Anti-Detect Browser Integration",
+    "AI Humanization",
+    "Visual Workflow Builder",
+    "Scheduling & Recurring Runs",
+    "10+ AI Model Providers",
+];
+
+const competitors = [
+    { name: "browser-use", checks: [false, false, false, false, false, false] },
+    { name: "Fellou", checks: [false, false, false, false, false, false] },
+    { name: "Airtop", checks: [false, false, false, false, true, false] },
+    { name: "Skyvern", checks: [false, false, false, true, true, false] },
+];
+---
+
+<div class="py-20">
+    <Container>
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-sm font-medium uppercase tracking-widest text-secondary">Comparison</span>
+            <h2 class="mt-4 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl">
+                How Elyt stacks up
+            </h2>
+        </div>
+
+        <!-- Mobile cards view -->
+        <div class="lg:hidden space-y-4">
+            {features.map((feature, fi) => (
+                <div class="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-4">
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-3">{feature}</h4>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between py-1">
+                            <span class="text-sm font-bold text-primary">Elyt</span>
+                            <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        {competitors.map((comp) => (
+                            <div class="flex items-center justify-between py-1">
+                                <span class="text-sm text-gray-500">{comp.name}</span>
+                                {comp.checks[fi] ? (
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                ) : (
+                                    <svg class="w-5 h-5 text-gray-300 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <!-- Desktop table view -->
+        <div class="hidden lg:block overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-800">
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-gray-50 dark:bg-gray-900">
+                        <th class="text-left p-5 text-sm font-medium text-gray-500 dark:text-gray-400 w-[30%]">Feature</th>
+                        <th class="p-5 text-sm font-bold text-primary bg-primary/5 dark:bg-primary/10 w-[14%]">
+                            <span class="text-base">Elyt</span>
+                        </th>
+                        {competitors.map((comp) => (
+                            <th class="p-5 text-sm font-medium text-gray-500 dark:text-gray-400 w-[14%]">{comp.name}</th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody class="bg-white dark:bg-gray-950">
+                    {features.map((feature, fi) => (
+                        <tr class="border-t border-gray-100 dark:border-gray-800">
+                            <td class="p-5 text-sm font-medium text-gray-700 dark:text-gray-300">{feature}</td>
+                            <td class="p-5 text-center bg-primary/5 dark:bg-primary/10">
+                                <svg class="w-5 h-5 text-primary mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </td>
+                            {competitors.map((comp) => (
+                                <td class="p-5 text-center">
+                                    {comp.checks[fi] ? (
+                                        <svg class="w-5 h-5 text-gray-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    ) : (
+                                        <svg class="w-5 h-5 text-gray-300 dark:text-gray-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    )}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    </Container>
+</div>

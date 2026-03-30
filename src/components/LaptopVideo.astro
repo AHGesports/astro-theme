@@ -1,0 +1,386 @@
+---
+interface Props {
+  videoSrc: string;
+  webmSrc?: string;
+  posterSrc?: string;
+  class?: string;
+}
+
+const { videoSrc, webmSrc, posterSrc, class: className } = Astro.props;
+---
+
+<div class:list={["laptop-wrapper", className]}>
+  <button type="button" class="laptop-link" aria-label="Expand video">
+    <div class="laptop-screen-frame">
+      <div class="notch">
+        <div class="camera"></div>
+      </div>
+      <div class="screen">
+        <video
+          id="hero-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="none"
+          poster={posterSrc}
+        >
+          {webmSrc && <source src={webmSrc} type="video/webm" />}
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+      </div>
+    </div>
+
+    <div class="play-overlay">
+      <div class="play-button">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      </div>
+      <span class="play-text">Click to expand</span>
+    </div>
+  </button>
+</div>
+
+<!-- Video Modal -->
+<div id="video-modal" class="video-modal" aria-hidden="true">
+  <div class="modal-backdrop"></div>
+  <div class="modal-content">
+    <button type="button" class="modal-close" aria-label="Close video">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <video
+      id="modal-video"
+      controls
+      playsinline
+      preload="metadata"
+    >
+      <source src={videoSrc} type="video/mp4" />
+    </video>
+  </div>
+</div>
+
+<style>
+  .laptop-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .laptop-link {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+  }
+
+  .laptop-screen-frame {
+    position: relative;
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow:
+      0 0 0 2px #0a0a0a,
+      0 10px 30px rgba(0, 0, 0, 0.4);
+    width: 320px;
+  }
+
+  @media (min-width: 640px) {
+    .laptop-screen-frame {
+      width: 480px;
+      border-radius: 14px;
+      padding: 10px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .laptop-screen-frame {
+      width: 560px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .laptop-screen-frame {
+      width: 680px;
+      border-radius: 16px;
+      padding: 12px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .laptop-screen-frame {
+      width: 780px;
+    }
+  }
+
+  .notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 18px;
+    background: #1a1a1a;
+    border-radius: 0 0 10px 10px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .notch {
+      width: 100px;
+      height: 22px;
+    }
+  }
+
+  .camera {
+    width: 6px;
+    height: 6px;
+    background: #2a2a2a;
+    border-radius: 50%;
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (min-width: 1024px) {
+    .camera {
+      width: 8px;
+      height: 8px;
+    }
+  }
+
+  .screen {
+    position: relative;
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 673 / 360;
+  }
+
+  .screen video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.15);
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+    border-radius: 12px;
+    pointer-events: none;
+  }
+
+  .laptop-link:hover .play-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .play-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (min-width: 1024px) {
+    .play-button {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  .laptop-link:hover .play-button {
+    transform: scale(1.1);
+  }
+
+  .play-button svg {
+    width: 20px;
+    height: 20px;
+    color: #000;
+    margin-left: 3px;
+  }
+
+  @media (min-width: 1024px) {
+    .play-button svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .play-text {
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .laptop-link:hover .play-text {
+    opacity: 1;
+  }
+
+  @media (min-width: 1024px) {
+    .play-text {
+      font-size: 12px;
+    }
+  }
+
+  .video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .video-modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+  }
+
+  .modal-content {
+    position: relative;
+    width: 90vw;
+    max-width: 1200px;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .modal-content video {
+    width: 100%;
+    max-height: 85vh;
+    border-radius: 8px;
+    background: #000;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: 10;
+  }
+
+  .modal-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .modal-close svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .modal-close {
+      top: -45px;
+      right: 5px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>
+
+<script>
+  const heroVideo = document.getElementById('hero-video') as HTMLVideoElement;
+  const modal = document.getElementById('video-modal');
+  const modalVideo = document.getElementById('modal-video') as HTMLVideoElement;
+  const openBtn = document.querySelector('.laptop-link');
+  const closeBtn = document.querySelector('.modal-close');
+  const backdrop = document.querySelector('.modal-backdrop');
+
+  function openModal() {
+    if (modal && modalVideo && heroVideo) {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      heroVideo.pause();
+      modalVideo.currentTime = 0;
+      modalVideo.play();
+    }
+  }
+
+  function closeModal() {
+    if (modal && modalVideo && heroVideo) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      modalVideo.pause();
+      heroVideo.play();
+    }
+  }
+
+  openBtn?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  if (heroVideo) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            heroVideo.preload = 'metadata';
+            heroVideo.load();
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(heroVideo);
+  }
+</script>

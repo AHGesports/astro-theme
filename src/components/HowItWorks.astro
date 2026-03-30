@@ -1,0 +1,73 @@
+---
+import Container from "./Container.astro"
+
+const steps = [
+    {
+        step: "01",
+        title: "Connect & Create Profiles",
+        description: "Link your anti-detect browser — AdsPower, MoreLogin, or GoLogin — and create as many browser profiles as you need. Each profile has its own fingerprint, proxy, and identity.",
+        image: "/Elyt/images/poster.webp",
+    },
+    {
+        step: "02",
+        title: "Build Workflows in Plain English",
+        description: "Describe what you want to automate in natural language. Chain multiple AI nodes together into complex workflows with conditional logic, loops, and data passing between steps.",
+        image: "/Elyt/images/poster.webp",
+    },
+    {
+        step: "03",
+        title: "Run Across All Profiles on Schedule",
+        description: "Launch your workflow across every profile simultaneously or staggered. Set recurring schedules. Elyt's AI humanizer makes each execution look like a real person browsing.",
+        image: "/Elyt/images/poster.webp",
+    },
+];
+---
+
+<div class="py-20" id="how-it-works">
+    <Container>
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-sm font-medium uppercase tracking-widest text-primary">How It Works</span>
+            <h2 class="mt-4 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl">
+                Three steps to mass automation
+            </h2>
+        </div>
+
+        <div class="relative">
+            <!-- Connecting line (desktop only) -->
+            <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-y-1/2"></div>
+
+            <div class="grid gap-8 lg:grid-cols-3">
+                {steps.map((item, i) => (
+                    <div class="group relative" style={`animation-delay: ${i * 150}ms`}>
+                        <div class="relative overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 transition-all duration-300 hover:shadow-2xl hover:shadow-gray-600/10 hover:-translate-y-1">
+                            <!-- Step image -->
+                            <div class="overflow-hidden">
+                                <img
+                                    src={item.image}
+                                    alt={item.title}
+                                    class="w-full h-48 object-cover transition duration-500 group-hover:scale-105"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <!-- Step content -->
+                            <div class="p-8">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-bold text-sm">
+                                        {item.step}
+                                    </span>
+                                    <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                                    {item.title}
+                                </h3>
+                                <p class="mt-3 text-gray-600 dark:text-gray-400 leading-relaxed">
+                                    {item.description}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </Container>
+</div>

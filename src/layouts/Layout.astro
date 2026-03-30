@@ -2,6 +2,7 @@
 import { AstroFont } from 'astro-font';
 import AppFooter from "../components/AppFooter.astro";
 import AppHeader from "../components/AppHeader.astro";
+import ContactModal from "../components/ContactModal.astro";
 import "./../tailus.css"
 ---
 
@@ -12,8 +13,8 @@ import "./../tailus.css"
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <meta name="description" content="Template built with tailwindcss using Tailus blocks v2" />
-        <title>Tailus astro theme</title>
+        <meta name="description" content="AI browser automation at scale. Automate any website across hundreds of profiles without getting detected. Works with AdsPower, MoreLogin, and GoLogin." />
+        <title>Elyt — AI Browser Automation at Scale</title>
 
         <AstroFont
             config={[
@@ -24,7 +25,7 @@ import "./../tailus.css"
                     display: "swap",
                     selector: "html",
                     fallback: "sans-serif",
-                    googleFontsURL: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap',
+                    googleFontsURL: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap',
                 },
             ]}
         />
@@ -33,5 +34,45 @@ import "./../tailus.css"
         <AppHeader />
         <slot />
         <AppFooter />
+        <ContactModal />
+
+        <!-- Cal.com Embed (deferred) -->
+        <script is:inline>
+          if (document.readyState === 'complete') {
+            initCal();
+          } else {
+            window.addEventListener('load', initCal);
+          }
+          function initCal() {
+            (function (C, A, L) {
+              let p = function (a, ar) { a.q.push(ar); };
+              let d = C.document;
+              C.Cal = C.Cal || function () {
+                let cal = C.Cal;
+                let ar = arguments;
+                if (!cal.loaded) {
+                  cal.ns = {}; cal.q = cal.q || [];
+                  d.head.appendChild(d.createElement("script")).src = A;
+                  cal.loaded = true;
+                }
+                if (ar[0] === L) {
+                  const api = function () { p(api, arguments); };
+                  const namespace = ar[1];
+                  api.q = api.q || [];
+                  if (typeof namespace === "string") {
+                    cal.ns[namespace] = api;
+                    p(api, ar);
+                  } else {
+                    p(cal, ar);
+                  }
+                  return;
+                }
+                p(cal, ar);
+              };
+            })(window, "https://app.cal.com/embed/embed.js", "init");
+            Cal("init", { origin: "https://cal.com" });
+            Cal("ui", {"styles":{"branding":{"brandColor":"#4f46e5"}},"hideEventTypeDetails":false,"layout":"month_view"});
+          }
+        </script>
     </body>
 </html>
