@@ -5,27 +5,27 @@ const features = [
     {
         title: "Mass Profile Orchestration",
         description: "Run your AI automation across hundreds of browser profiles simultaneously. Each profile has its own fingerprint, proxy, cookies, and identity — completely isolated. Scale from 1 to 1,000 profiles without changing a single workflow.",
-        image: "/Elyt/images/poster.webp",
+        image: "/Elyt/poster_11s.webp",
         badge: "Scale",
     },
     {
         title: "Anti-Detection + AI Humanizer",
         description: "Elyt's AI humanizer generates realistic mouse movements, natural typing rhythms, random scroll patterns, and human-like pauses. Paired with anti-detect browsers, your automated sessions are indistinguishable from real users.",
-        image: "/Elyt/images/poster.webp",
+        image: "/Elyt/poster_14s.webp",
         badge: "Stealth",
     },
     {
         title: "Visual Workflow System",
         description: "Build complex multi-step automations with a visual node editor. Chain AI actions, add conditional logic, pass data between steps, and schedule everything to run on autopilot. No coding required — describe each step in plain English.",
-        image: "/Elyt/images/poster.webp",
+        image: "/Elyt/poster_52s.webp",
         badge: "Power",
     },
 ];
 ---
 
-<div id="features" class="py-20">
+<div id="features" class="py-16">
     <Container>
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-12">
             <span class="text-sm font-medium uppercase tracking-widest text-secondary">Features</span>
             <h2 class="mt-4 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl">
                 What makes Elyt different
@@ -37,17 +37,17 @@ const features = [
 
         <div class="space-y-20">
             {features.map((feature, i) => (
-                <div class:list={[
+                <div data-feature-card class:list={[
                     "lg:flex lg:items-center lg:gap-16",
                     i % 2 === 1 ? "lg:flex-row-reverse" : ""
                 ]}>
                     <!-- Image -->
                     <div class="lg:w-1/2 mb-8 lg:mb-0">
-                        <div class="relative overflow-hidden rounded-3xl">
+                        <div class="relative overflow-hidden rounded-3xl aspect-[4/3]">
                             <img
                                 src={feature.image}
                                 alt={feature.title}
-                                class="w-full h-64 lg:h-96 object-cover"
+                                class="w-full h-full object-cover"
                                 loading="lazy"
                             />
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
@@ -70,3 +70,48 @@ const features = [
         </div>
     </Container>
 </div>
+
+<script>
+    import LeaderLine from "leader-line-new";
+
+    function initArrows() {
+        const cards = Array.from(document.querySelectorAll("[data-feature-card]"));
+        if (cards.length < 2) return;
+
+        // Only show on large screens
+        if (window.innerWidth < 1024) return;
+
+        for (let i = 0; i < cards.length - 1; i++) {
+            const start = cards[i];
+            const end = cards[i + 1];
+
+            // Even card: image is on left, so content is on right → exit right side
+            // Odd card: layout is reversed, content is on left → exit left side
+            const startSocket = i % 2 === 0 ? "right" : "left";
+
+            new LeaderLine(start, end, {
+                color: "rgba(99,102,241,0.55)",
+                size: 2.5,
+                path: "arc",
+                startSocket,
+                endSocket: "top",
+                endPlug: "arrow3",
+                endPlugSize: 1.8,
+                startPlugColor: "rgba(99,102,241,0.55)",
+                endPlugColor: "rgba(99,102,241,0.9)",
+                gradient: true,
+                startLabel: "",
+                endLabel: "",
+                startSocketGravity: 120,
+                endSocketGravity: 80,
+            });
+        }
+    }
+
+    // Wait for layout to settle before measuring positions
+    if (document.readyState === "complete") {
+        initArrows();
+    } else {
+        window.addEventListener("load", initArrows);
+    }
+</script>

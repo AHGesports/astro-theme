@@ -2,39 +2,104 @@
 import Container from "./Container.astro"
 
 const providers = [
-    {
-        name: "AdsPower",
-        logo: "/images/clients/adspower.svg",
-    },
-    {
-        name: "MoreLogin",
-        logo: "/images/clients/morelogin.svg",
-    },
-    {
-        name: "GoLogin",
-        logo: "/images/clients/gologin.svg",
-    },
+    { name: "AdsPower", logo: "/images/clients/adspower.svg" },
+    { name: "MoreLogin", logo: "/images/clients/morelogin.svg" },
+    { name: "GoLogin", logo: "/images/clients/gologin.svg" },
+    { name: "MultiLogin", logo: "/images/clients/multilogin.svg" },
+    { name: "Kameleo", logo: "/images/clients/kameleo.svg" },
+    { name: "Dolphin Anty", logo: "/images/clients/dolphin-anty.svg" },
+    { name: "Incogniton", logo: "/images/clients/incogniton.svg" },
+    { name: "VMLogin", logo: "/images/clients/vmlogin.png" },
+    { name: "Undetectable", logo: "/images/clients/undetectable.svg" },
 ];
 ---
 
-<div class="py-12">
+<div class="py-8">
     <Container>
-        <div class="text-center">
-            <p class="text-sm font-medium uppercase tracking-widest text-gray-500 dark:text-gray-400">
-                Works with your anti-detect browser
-            </p>
-            <div class="mt-8 flex flex-wrap items-center justify-center gap-8 md:gap-16">
-                {providers.map((provider) => (
-                    <div class="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300">
-                        <img
-                            src={provider.logo}
-                            alt={provider.name}
-                            class="h-8 md:h-10 w-auto"
-                            loading="lazy"
-                        />
-                    </div>
-                ))}
-            </div>
-        </div>
+        <p class="text-center text-sm font-medium uppercase tracking-widest text-gray-500 dark:text-gray-400">
+            Works with your anti-detect browser
+        </p>
     </Container>
+
+    <div class="marquee-wrap mt-8" aria-label="Anti-detect browser partners">
+        <div class="marquee-track">
+            {/* First copy */}
+            {providers.map((p) => (
+                <div class="marquee-item">
+                    <img src={p.logo} alt={p.name} class="h-7 md:h-9 w-auto max-w-[140px] object-contain" loading="lazy" draggable="false" />
+                </div>
+            ))}
+            {/* Duplicate for seamless loop */}
+            {providers.map((p) => (
+                <div class="marquee-item" aria-hidden="true">
+                    <img src={p.logo} alt="" class="h-7 md:h-9 w-auto max-w-[140px] object-contain" loading="lazy" draggable="false" />
+                </div>
+            ))}
+        </div>
+    </div>
 </div>
+
+<style>
+    .marquee-wrap {
+        position: relative;
+        overflow: hidden;
+        /* Fade masks on left/right edges */
+        mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    .marquee-track {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        width: max-content;
+        animation: marquee 35s linear infinite;
+    }
+
+    .marquee-wrap:hover .marquee-track {
+        animation-play-state: paused;
+    }
+
+    .marquee-item {
+        flex-shrink: 0;
+        padding: 0 1rem;
+        /* Normalize all logos to monochrome — handles white/dark/colored SVGs uniformly */
+        filter: brightness(0) opacity(0.4);
+        transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+
+    .marquee-item:hover {
+        filter: brightness(0) opacity(0.7);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .marquee-item {
+            filter: brightness(0) invert(1) opacity(0.4);
+        }
+        .marquee-item:hover {
+            filter: brightness(0) invert(1) opacity(0.7);
+        }
+    }
+
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    /* Accessibility: respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        .marquee-track {
+            animation: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: auto;
+        }
+        .marquee-item[aria-hidden="true"] {
+            display: none;
+        }
+        .marquee-wrap {
+            mask-image: none;
+            -webkit-mask-image: none;
+        }
+    }
+</style>

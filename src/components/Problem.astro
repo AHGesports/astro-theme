@@ -1,32 +1,32 @@
 ---
 import Container from "./Container.astro"
+import ProblemSingleBrowser from "./illustrations/ProblemSingleBrowser.astro"
+import ProblemDetected from "./illustrations/ProblemDetected.astro"
+import ProblemSimplePrompts from "./illustrations/ProblemSimplePrompts.astro"
 
 const problems = [
     {
         number: "01",
         title: "One Browser. One Account. That's It.",
         description: "Every AI automation tool on the market controls a single browser. Need to run tasks across dozens or hundreds of accounts? You're on your own.",
-        image: "/Elyt/images/poster.webp",
     },
     {
         number: "02",
         title: "Detected in Minutes. Banned in Hours.",
         description: "AI bots move like robots — identical timing, pixel-perfect clicks, zero behavioral variation. Modern anti-bot systems catch them instantly.",
-        image: "/Elyt/images/poster.webp",
     },
     {
         number: "03",
         title: "Simple Prompts. No Real Workflows.",
         description: 'Competitors let you type a prompt and hope for the best. No chaining tasks. No scheduling. No conditional logic. Just "do this one thing, once."',
-        image: "/Elyt/images/poster.webp",
     },
 ];
 ---
 
-<div class="py-20">
+<div class="py-16 bg-violet-50/40 dark:bg-gray-900/50">
     <Container>
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-sm font-medium uppercase tracking-widest text-secondary">The Problem</span>
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-sm font-medium uppercase tracking-widest text-amber-600">The Problem</span>
             <h2 class="mt-4 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl">
                 Why current AI automation tools fail
             </h2>
@@ -39,14 +39,11 @@ const problems = [
                     "lg:flex lg:items-center",
                     i % 2 === 1 ? "lg:flex-row-reverse" : ""
                 ]}>
-                    <!-- Image side -->
-                    <div class="lg:w-1/2 overflow-hidden">
-                        <img
-                            src={problem.image}
-                            alt={problem.title}
-                            class="w-full h-56 lg:h-80 object-cover transition duration-500 group-hover:scale-105"
-                            loading="lazy"
-                        />
+                    <!-- Illustration side -->
+                    <div class="lg:w-1/2 overflow-hidden transition duration-500 group-hover:scale-105">
+                        {i === 0 && <ProblemSingleBrowser class="w-full h-56 lg:h-80" />}
+                        {i === 1 && <ProblemDetected class="w-full h-56 lg:h-80" />}
+                        {i === 2 && <ProblemSimplePrompts class="w-full h-56 lg:h-80" />}
                     </div>
                     <!-- Content side -->
                     <div class="lg:w-1/2 p-8 lg:p-12">

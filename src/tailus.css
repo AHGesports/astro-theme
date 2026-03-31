@@ -1,7 +1,40 @@
 @import 'tailwindcss';
 
 @theme {
-    --color-primary : var(--color-indigo-600);
-    --color-secondary : var(--color-orange-600);
-    --color-info : var(--color-blue-600);
+    --color-primary: #667eea;
+    --color-primary-dark: #5a67d8;
+    --color-secondary: #f59e0b;
+    --color-info: var(--color-blue-600);
+    --color-brand-start: #667eea;
+    --color-brand-end: #764ba2;
+    --color-surface-tinted: oklch(0.969 0.016 293.756); /* violet-50 */
+}
+
+/* Brand gradient buttons */
+.btn-gradient {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    transition: all 0.2s ease;
+}
+.btn-gradient:hover {
+    background: linear-gradient(135deg, #5a67d8, #6b46c1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+.btn-gradient:active {
+    background: linear-gradient(135deg, #5569d8, #643f96);
+}
+
+/* Gradient text for headings */
+.text-gradient {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

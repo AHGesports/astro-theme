@@ -1,73 +1,142 @@
 ---
 import Container from "./Container.astro"
+import HowConnectProfiles from "./illustrations/HowConnectProfiles.astro"
+import HowBuildWorkflows from "./illustrations/HowBuildWorkflows.astro"
+import HowRunProfiles from "./illustrations/HowRunProfiles.astro"
 
 const steps = [
     {
         step: "01",
         title: "Connect & Create Profiles",
         description: "Link your anti-detect browser — AdsPower, MoreLogin, or GoLogin — and create as many browser profiles as you need. Each profile has its own fingerprint, proxy, and identity.",
-        image: "/Elyt/images/poster.webp",
     },
     {
         step: "02",
         title: "Build Workflows in Plain English",
         description: "Describe what you want to automate in natural language. Chain multiple AI nodes together into complex workflows with conditional logic, loops, and data passing between steps.",
-        image: "/Elyt/images/poster.webp",
     },
     {
         step: "03",
         title: "Run Across All Profiles on Schedule",
         description: "Launch your workflow across every profile simultaneously or staggered. Set recurring schedules. Elyt's AI humanizer makes each execution look like a real person browsing.",
-        image: "/Elyt/images/poster.webp",
     },
 ];
 ---
 
-<div class="py-20" id="how-it-works">
+<div class="py-16 md:py-24" id="how-it-works">
     <Container>
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-14 md:mb-20">
             <span class="text-sm font-medium uppercase tracking-widest text-primary">How It Works</span>
             <h2 class="mt-4 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl">
                 Three steps to mass automation
             </h2>
         </div>
 
-        <div class="relative">
-            <!-- Connecting line (desktop only) -->
-            <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-y-1/2"></div>
-
-            <div class="grid gap-8 lg:grid-cols-3">
-                {steps.map((item, i) => (
-                    <div class="group relative" style={`animation-delay: ${i * 150}ms`}>
-                        <div class="relative overflow-hidden rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 transition-all duration-300 hover:shadow-2xl hover:shadow-gray-600/10 hover:-translate-y-1">
-                            <!-- Step image -->
-                            <div class="overflow-hidden">
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    class="w-full h-48 object-cover transition duration-500 group-hover:scale-105"
-                                    loading="lazy"
-                                />
-                            </div>
-                            <!-- Step content -->
-                            <div class="p-8">
-                                <div class="flex items-center gap-4 mb-4">
-                                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-bold text-sm">
-                                        {item.step}
-                                    </span>
-                                    <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-                                    {item.title}
-                                </h3>
-                                <p class="mt-3 text-gray-600 dark:text-gray-400 leading-relaxed">
-                                    {item.description}
-                                </p>
+        <!-- Mobile: simple stack -->
+        <div class="md:hidden space-y-8">
+            {steps.map((item, i) => (
+                <div>
+                    <div class="overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg shadow-gray-200/50 dark:shadow-none">
+                        <div class="aspect-[4/3]">
+                            {i === 0 && <HowConnectProfiles class="w-full h-full" />}
+                            {i === 1 && <HowBuildWorkflows class="w-full h-full" />}
+                            {i === 2 && <HowRunProfiles class="w-full h-full" />}
+                        </div>
+                        <div class="px-5 py-4 flex items-start gap-3">
+                            <span class="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-bold text-xs shadow-lg shadow-indigo-500/20 flex-shrink-0">
+                                {item.step}
+                            </span>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">{item.title}</h3>
+                                <p class="mt-1 text-gray-600 dark:text-gray-400 leading-relaxed text-sm">{item.description}</p>
                             </div>
                         </div>
                     </div>
-                ))}
+                </div>
+            ))}
+        </div>
+
+        <!-- Desktop: whiteboard-style asymmetric layout
+             Card 1: left-aligned ~78% → right edge ~780/1000
+             Card 2: right-aligned ~78% → left edge ~220, center ~610
+             Card 3: ml-[10%] ~78%     → center ~490
+             Arrows curve OUTSIDE through the empty margin, never crossing card content -->
+        <div class="hidden md:block">
+
+            <!-- Step 1: pinned left, tilted -->
+            <div class="w-[82%] lg:w-[78%] rotate-[-1.2deg]">
+                <div class="group overflow-hidden rounded-2xl lg:rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg shadow-gray-200/50 dark:shadow-none transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="aspect-video">
+                        <HowConnectProfiles class="w-full h-full" />
+                    </div>
+                    <div class="px-6 lg:px-8 py-5 lg:py-6 flex items-start gap-4">
+                        <span class="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-bold text-sm shadow-lg shadow-indigo-500/20 flex-shrink-0">01</span>
+                        <div>
+                            <h3 class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white">{steps[0].title}</h3>
+                            <p class="mt-1.5 text-gray-600 dark:text-gray-400 leading-relaxed text-sm lg:text-base">{steps[0].description}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Arrow 1→2: exits card 1 bottom-right edge, curves out right through empty margin, arrives at card 2 top-center -->
+            <svg class="w-full h-[80px] lg:h-[100px]" viewBox="0 0 1000 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="hw-a1" x1="780" y1="0" x2="610" y2="100" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#667eea" />
+                        <stop offset="1" stop-color="#764ba2" />
+                    </linearGradient>
+                </defs>
+                <!-- Path: from card1 right edge (780,0) → out right to (940,40) → back left to card2 top-center (610,100) -->
+                <path d="M780 0 C860 0, 940 25, 940 50 C940 75, 780 100, 610 100" stroke="url(#hw-a1)" stroke-width="2.5" stroke-dasharray="10 7" stroke-linecap="round" opacity="0.35" />
+                <path d="M620 90 L610 103 L600 90" fill="none" stroke="url(#hw-a1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" />
+            </svg>
+
+            <!-- Step 2: pushed far right, opposite tilt -->
+            <div class="w-[82%] lg:w-[78%] ml-auto rotate-[1deg]">
+                <div class="group overflow-hidden rounded-2xl lg:rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg shadow-gray-200/50 dark:shadow-none transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="aspect-video">
+                        <HowBuildWorkflows class="w-full h-full" />
+                    </div>
+                    <div class="px-6 lg:px-8 py-5 lg:py-6 flex items-start gap-4">
+                        <span class="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-bold text-sm shadow-lg shadow-indigo-500/20 flex-shrink-0">02</span>
+                        <div>
+                            <h3 class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white">{steps[1].title}</h3>
+                            <p class="mt-1.5 text-gray-600 dark:text-gray-400 leading-relaxed text-sm lg:text-base">{steps[1].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arrow 2→3: exits card 2 bottom-left edge, curves out left through empty margin, arrives at card 3 top-center -->
+            <svg class="w-full h-[80px] lg:h-[100px]" viewBox="0 0 1000 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="hw-a2" x1="220" y1="0" x2="490" y2="100" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#764ba2" />
+                        <stop offset="1" stop-color="#667eea" />
+                    </linearGradient>
+                </defs>
+                <!-- Path: from card2 left edge (220,0) → out left to (60,40) → back right to card3 top-center (490,100) -->
+                <path d="M220 0 C140 0, 60 25, 60 50 C60 75, 280 100, 490 100" stroke="url(#hw-a2)" stroke-width="2.5" stroke-dasharray="10 7" stroke-linecap="round" opacity="0.35" />
+                <path d="M480 90 L490 103 L500 90" fill="none" stroke="url(#hw-a2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" />
+            </svg>
+
+            <!-- Step 3: offset center-left, slight opposite tilt -->
+            <div class="w-[82%] lg:w-[78%] ml-[10%] rotate-[-0.7deg]">
+                <div class="group overflow-hidden rounded-2xl lg:rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg shadow-gray-200/50 dark:shadow-none transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="aspect-video">
+                        <HowRunProfiles class="w-full h-full" />
+                    </div>
+                    <div class="px-6 lg:px-8 py-5 lg:py-6 flex items-start gap-4">
+                        <span class="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white font-bold text-sm shadow-lg shadow-indigo-500/20 flex-shrink-0">03</span>
+                        <div>
+                            <h3 class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white">{steps[2].title}</h3>
+                            <p class="mt-1.5 text-gray-600 dark:text-gray-400 leading-relaxed text-sm lg:text-base">{steps[2].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </Container>
 </div>

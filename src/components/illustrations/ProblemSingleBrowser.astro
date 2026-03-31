@@ -1,0 +1,77 @@
+---
+const { class: className, ...rest } = Astro.props;
+
+const profiles = [
+    { name: "LinkedIn", icon: "/Elyt/images/socials/linkedin.svg", bg: "#0A66C2" },
+    { name: "Instagram", icon: "/Elyt/images/socials/instagram.svg", bg: "#E4405F" },
+    { name: "X", icon: "/Elyt/images/socials/x.svg", bg: "#000000" },
+    { name: "Facebook", icon: "/Elyt/images/socials/facebook.svg", bg: "#0866FF" },
+    { name: "TikTok", icon: "/Elyt/images/socials/tiktok.svg", bg: "#000000" },
+    { name: "YouTube", icon: "/Elyt/images/socials/youtube.svg", bg: "#FF0000" },
+    { name: "LinkedIn", icon: "/Elyt/images/socials/linkedin.svg", bg: "#0A66C2" },
+    { name: "Instagram", icon: "/Elyt/images/socials/instagram.svg", bg: "#E4405F" },
+    { name: "X", icon: "/Elyt/images/socials/x.svg", bg: "#000000" },
+    { name: "Facebook", icon: "/Elyt/images/socials/facebook.svg", bg: "#0866FF" },
+    { name: "TikTok", icon: "/Elyt/images/socials/tiktok.svg", bg: "#000000" },
+    { name: "YouTube", icon: "/Elyt/images/socials/youtube.svg", bg: "#FF0000" },
+];
+---
+
+<div class:list={["relative overflow-hidden bg-[#2d2568]", className]} {...rest}>
+    <!-- Grid of locked-out profile cards -->
+    <div class="absolute inset-0 grid grid-cols-4 gap-2 p-3 opacity-60">
+        {profiles.map((p) => (
+            <div class="relative rounded-lg overflow-hidden border border-white/10 bg-white/[0.06]">
+                <!-- Mini tab bar -->
+                <div class="flex items-center gap-1.5 px-2 py-1.5 bg-white/[0.08] border-b border-white/[0.06]">
+                    <div class="w-4 h-4 rounded-sm flex-shrink-0 flex items-center justify-center" style={`background:${p.bg}`}>
+                        <img src={p.icon} alt="" class="w-2.5 h-2.5 brightness-0 invert" loading="lazy" />
+                    </div>
+                    <span class="text-[8px] text-white/60 font-medium truncate">{p.name}</span>
+                    <!-- Lock -->
+                    <svg class="w-3 h-3 ml-auto flex-shrink-0 text-red-400" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z" />
+                    </svg>
+                </div>
+                <!-- Skeleton body -->
+                <div class="p-2 space-y-1.5">
+                    <div class="h-1.5 w-3/4 rounded-full bg-white/[0.08]"></div>
+                    <div class="h-1.5 w-1/2 rounded-full bg-white/[0.06]"></div>
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <!-- Central browser window (the ONE that works) -->
+    <div class="absolute inset-0 flex items-center justify-center p-6">
+        <div class="relative w-72 max-w-[65%] rounded-2xl overflow-hidden border-2 border-indigo-400/60 shadow-[0_0_40px_rgba(102,126,234,0.35),0_20px_60px_rgba(0,0,0,0.4)]">
+            <!-- Title bar -->
+            <div class="h-9 bg-gradient-to-r from-[#667eea] to-[#764ba2] flex items-center gap-2 px-3">
+                <div class="w-2.5 h-2.5 rounded-full bg-white/50"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-white/35"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-white/20"></div>
+                <div class="h-4 flex-1 ml-3 rounded-full bg-white/15"></div>
+            </div>
+            <!-- Body -->
+            <div class="bg-white px-5 py-5 space-y-4">
+                <!-- Content skeleton -->
+                <div class="space-y-2">
+                    <div class="h-2.5 w-[85%] rounded-full bg-indigo-200/70"></div>
+                    <div class="h-2.5 w-[60%] rounded-full bg-indigo-100/80"></div>
+                    <div class="h-2.5 w-[72%] rounded-full bg-indigo-100/50"></div>
+                </div>
+                <!-- User profile row -->
+                <div class="flex items-center gap-3 pt-2 border-t border-indigo-50">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white/70" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    </div>
+                    <div class="space-y-1.5 flex-1">
+                        <div class="h-2 w-20 rounded-full bg-indigo-200/60"></div>
+                        <div class="h-2 w-14 rounded-full bg-indigo-100/60"></div>
+                    </div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-green-500 ring-2 ring-green-500/30"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
