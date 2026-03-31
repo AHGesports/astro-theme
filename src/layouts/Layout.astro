@@ -1,5 +1,6 @@
 ---
 import { AstroFont } from 'astro-font';
+import Analytics from '@vercel/analytics/astro';
 import AppFooter from "../components/AppFooter.astro";
 import AppHeader from "../components/AppHeader.astro";
 import ContactModal from "../components/ContactModal.astro";
@@ -29,6 +30,7 @@ import "./../tailus.css"
                 },
             ]}
         />
+        <Analytics />
     </head>
     <body class="bg-white dark:bg-gray-950">
         <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
