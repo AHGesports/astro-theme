@@ -14,15 +14,7 @@ export const CONTACT = {
 
 export const SOCIALS = [
     {
-        NAME: "Github",
-        HREF: "https://github.com/AHGesports",
-    },
-    {
-        NAME: "Twitter",
-        HREF: "https://twitter.com/elyt_ai",
-    },
-    {
-        NAME: "Discord",
-        HREF: "https://discord.gg/elyt",
+        NAME: "Founded by Arshia Hemati",
+        HREF: "https://ArshiaHemati.com",
     },
 ];

@@ -3,13 +3,13 @@ import Container from "./Container.astro"
 
 const personas = [
     {
-        title: "Botters",
-        subtitle: "Sneaker cooks, ticket scalpers, account farmers",
+        title: "Multi-Account Managers",
+        subtitle: "E-commerce sellers, drop shippers, account operators",
         gradient: "from-orange-500 to-red-500",
         points: [
-            "Run hundreds of accounts with unique fingerprints",
-            "Human-like checkout behavior that beats anti-bot systems",
-            "Schedule drops and launches down to the second",
+            "Run hundreds of accounts with unique browser profiles",
+            "Automate repetitive tasks across every account at once",
+            "Schedule actions down to the second",
             "Auto-rotate proxies and identities per profile",
         ],
     },
@@ -18,10 +18,10 @@ const personas = [
         subtitle: "Price trackers, data collectors, market researchers",
         gradient: "from-emerald-500 to-teal-500",
         points: [
-            "Scrape at scale without triggering CAPTCHAs",
+            "Extract data at scale with AI-powered reliability",
             "Monitor thousands of product pages on schedule",
             "Extract structured data with AI — no selectors needed",
-            "Rotate fingerprints to avoid IP-based rate limits",
+            "Rotate profiles to maintain reliable access at scale",
         ],
     },
     {
@@ -49,7 +49,11 @@ const personas = [
 ];
 ---
 
-<div class="py-16 bg-violet-50/40 dark:bg-gray-900/50">
+<div class="relative py-16 bg-violet-50/40 dark:bg-gray-900/50">
+    <div aria-hidden="true" class="absolute inset-0 grid grid-cols-2 -space-x-52 opacity-[0.126] dark:opacity-[0.063]">
+        <div class="blur-[106px] h-56 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
+        <div class="blur-[106px] h-32 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
+    </div>
     <Container>
         <div class="text-center max-w-3xl mx-auto mb-12">
             <span class="text-sm font-medium uppercase tracking-widest text-primary">Built For</span>

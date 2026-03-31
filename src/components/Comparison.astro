@@ -3,7 +3,7 @@ import Container from "./Container.astro"
 
 const features = [
     "Mass Profile Orchestration",
-    "Anti-Detect Browser Integration",
+    "Multi-Browser Provider Support",
     "AI Humanization",
     "Visual Workflow Builder",
     "Scheduling & Recurring Runs",
@@ -11,14 +11,18 @@ const features = [
 ];
 
 const competitors = [
-    { name: "browser-use", checks: [false, false, false, false, false, false] },
-    { name: "Fellou", checks: [false, false, false, false, false, false] },
-    { name: "Airtop", checks: [false, false, false, false, true, false] },
+    { name: "browser-use", checks: [false, false, false, false, false, true] },
+    { name: "Fellou", checks: [false, false, false, true, true, false] },
+    { name: "Airtop", checks: [false, false, false, true, true, false] },
     { name: "Skyvern", checks: [false, false, false, true, true, false] },
 ];
 ---
 
-<div class="py-16">
+<div class="relative py-16">
+    <div aria-hidden="true" class="absolute inset-0 grid grid-cols-2 -space-x-52 opacity-[0.126] dark:opacity-[0.063]">
+        <div class="blur-[106px] h-56 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
+        <div class="blur-[106px] h-32 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
+    </div>
     <Container>
         <div class="text-center max-w-3xl mx-auto mb-12">
             <span class="text-sm font-medium uppercase tracking-widest text-amber-600">Comparison</span>

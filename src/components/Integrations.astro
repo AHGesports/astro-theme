@@ -2,37 +2,29 @@
 import Container from "./Container.astro"
 
 const providers = [
-    { name: "AdsPower", logo: "/images/clients/adspower.svg" },
-    { name: "MoreLogin", logo: "/images/clients/morelogin.svg" },
-    { name: "GoLogin", logo: "/images/clients/gologin.svg" },
-    { name: "MultiLogin", logo: "/images/clients/multilogin.svg" },
-    { name: "Kameleo", logo: "/images/clients/kameleo.svg" },
-    { name: "Dolphin Anty", logo: "/images/clients/dolphin-anty.svg" },
-    { name: "Incogniton", logo: "/images/clients/incogniton.svg" },
-    { name: "VMLogin", logo: "/images/clients/vmlogin.png" },
-    { name: "Undetectable", logo: "/images/clients/undetectable.svg" },
+    { name: "AdsPower", logo: "/images/clients/adspower.png", width: "130px" },
+    { name: "MoreLogin", logo: "/images/clients/morelogin.png", width: "140px" },
+    { name: "GoLogin", logo: "/images/clients/gologin.svg", width: "130px" },
+    { name: "MultiLogin", logo: "/images/clients/multilogin.svg", width: "130px" },
+    { name: "Kameleo", logo: "/images/clients/kameleo.svg", width: "118px" },
+    { name: "Dolphin Anty", logo: "/images/clients/dolphin-anty.png", width: "130px" },
+    { name: "Incogniton", logo: "/images/clients/incogniton.svg", width: "118px" },
+    // { name: "Undetectable", logo: "/images/clients/undetectable.svg", width: "130px" },
 ];
 ---
 
 <div class="py-8">
     <Container>
         <p class="text-center text-sm font-medium uppercase tracking-widest text-gray-500 dark:text-gray-400">
-            Works with your anti-detect browser
+            Works with your favorite browser providers
         </p>
     </Container>
 
     <div class="marquee-wrap mt-8" aria-label="Anti-detect browser partners">
         <div class="marquee-track">
-            {/* First copy */}
-            {providers.map((p) => (
-                <div class="marquee-item">
-                    <img src={p.logo} alt={p.name} class="h-7 md:h-9 w-auto max-w-[140px] object-contain" loading="lazy" draggable="false" />
-                </div>
-            ))}
-            {/* Duplicate for seamless loop */}
-            {providers.map((p) => (
-                <div class="marquee-item" aria-hidden="true">
-                    <img src={p.logo} alt="" class="h-7 md:h-9 w-auto max-w-[140px] object-contain" loading="lazy" draggable="false" />
+            {[...providers, ...providers, ...providers].map((p, i) => (
+                <div class="marquee-item" aria-hidden={i >= providers.length ? "true" : undefined}>
+                    <img src={p.logo} alt={i < providers.length ? p.name : ""} class="h-auto object-contain" style={`width: ${p.width};`} loading="lazy" draggable="false" />
                 </div>
             ))}
         </div>
@@ -51,9 +43,9 @@ const providers = [
     .marquee-track {
         display: flex;
         align-items: center;
-        gap: 3rem;
+        gap: 0;
         width: max-content;
-        animation: marquee 35s linear infinite;
+        animation: marquee 25s linear infinite;
     }
 
     .marquee-wrap:hover .marquee-track {
@@ -62,7 +54,10 @@ const providers = [
 
     .marquee-item {
         flex-shrink: 0;
-        padding: 0 1rem;
+        padding: 0 2.5rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
         /* Normalize all logos to monochrome — handles white/dark/colored SVGs uniformly */
         filter: brightness(0) opacity(0.4);
         transition: filter 0.3s ease, opacity 0.3s ease;
@@ -83,7 +78,7 @@ const providers = [
 
     @keyframes marquee {
         0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+        100% { transform: translateX(calc(-100% / 3)); }
     }
 
     /* Accessibility: respect reduced motion */

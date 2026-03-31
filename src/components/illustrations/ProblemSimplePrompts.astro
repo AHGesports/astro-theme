@@ -1,115 +1,73 @@
 ---
 const { class: className, ...rest } = Astro.props;
+
+const queuedTasks = [
+    { platform: "LinkedIn", icon: "/Elyt/images/socials/linkedin.svg", bg: "#0A66C2", task: "Send 50 connection requests" },
+    { platform: "Instagram", icon: "/Elyt/images/socials/instagram.svg", bg: "#E4405F", task: "Post carousel to 12 profiles" },
+    { platform: "X", icon: "/Elyt/images/socials/x.svg", bg: "#000000", task: "Reply to DMs on 8 accounts" },
+];
 ---
 
 <div class:list={["relative overflow-hidden bg-[#2d2568]", className]} {...rest}>
-    <div class="absolute inset-0 flex">
+    <div class="absolute inset-0 flex items-center justify-center p-4">
 
-        <!-- LEFT HALF: What you get — a sad single prompt -->
-        <div class="w-1/2 flex flex-col items-center justify-center p-4 relative">
-            <!-- Label -->
-            <div class="absolute top-3 left-0 right-0 flex justify-center">
-                <span class="text-[8px] text-white/30 font-semibold uppercase tracking-[0.15em]">What you get</span>
+        <!-- Single task manager window -->
+        <div class="w-full max-w-[380px] rounded-2xl overflow-hidden border border-white/15 shadow-[0_12px_50px_rgba(0,0,0,0.5)]">
+            <!-- Title bar -->
+            <div class="h-8 bg-[#252050] flex items-center gap-1.5 px-3 border-b border-white/5">
+                <div class="w-2 h-2 rounded-full bg-red-500/60"></div>
+                <div class="w-2 h-2 rounded-full bg-white/20"></div>
+                <div class="w-2 h-2 rounded-full bg-white/15"></div>
+                <span class="text-[8px] text-white/40 ml-2 font-medium">Task Queue</span>
             </div>
 
-            <div class="w-full max-w-[180px] rounded-xl overflow-hidden border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
-                <!-- Header -->
-                <div class="h-6 bg-[#252050] flex items-center gap-1.5 px-2 border-b border-white/5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-red-500/60"></div>
-                    <div class="w-1.5 h-1.5 rounded-full bg-yellow-500/40"></div>
-                    <div class="w-1.5 h-1.5 rounded-full bg-green-500/30"></div>
-                    <span class="text-[6px] text-white/30 ml-1">AI Tool</span>
-                </div>
-                <!-- Prompt area — empty, lonely -->
-                <div class="bg-[#16133a] p-3 space-y-6">
-                    <!-- Huge empty space — that's the point -->
-                    <div class="flex items-center justify-center py-6">
-                        <span class="text-[7px] text-white/10 italic">No history. No workflows. Just this box.</span>
-                    </div>
-                    <!-- Single input -->
-                    <div class="flex items-center gap-1.5">
-                        <div class="flex-1 h-6 rounded-full border border-white/10 bg-white/[0.03] px-2.5 flex items-center">
-                            <span class="text-[6px] text-white/20">Type a prompt and hope...</span>
+            <div class="bg-[#16133a] rounded-b-2xl">
+                <!-- ACTIVE TASK — highlighted row -->
+                <div class="px-4 py-3 border-b border-white/[0.06] bg-indigo-500/[0.08] border-l-2 border-l-indigo-400">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-6 h-6 rounded-sm flex-shrink-0 flex items-center justify-center bg-[#FF0000]">
+                            <img src="/Elyt/images/socials/youtube.svg" alt="" class="w-3.5 h-3.5 brightness-0 invert" loading="lazy" />
                         </div>
-                        <div class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-2.5 h-2.5 text-white/25" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[9px] text-white/80 font-semibold">Upload video to profile #1</span>
+                                <div class="flex items-center gap-1 flex-shrink-0 ml-2">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                                    <span class="text-[8px] text-green-400/80 font-medium">Running</span>
+                                </div>
+                            </div>
+                            <!-- Progress bar -->
+                            <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-1.5">
+                                <div class="h-full w-[35%] rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Divider -->
-        <div class="w-px bg-white/[0.06] self-stretch my-6"></div>
+                <!-- QUEUED TASKS — greyed out, each with a paused icon -->
+                {queuedTasks.map((task, i) => (
+                    <div class:list={[
+                        "px-4 py-2.5 border-b border-white/[0.04] flex items-center gap-2.5",
+                        i >= 2 ? "opacity-30" : "opacity-50"
+                    ]}>
+                        <div class="w-6 h-6 rounded-sm flex-shrink-0 flex items-center justify-center" style={`background:${task.bg}`}>
+                            <img src={task.icon} alt="" class="w-3.5 h-3.5 brightness-0 invert" loading="lazy" />
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-[8px] text-white/40 font-medium truncate block">{task.task}</span>
+                        </div>
+                        <!-- Paused icon -->
+                        <div class="flex items-center gap-1 flex-shrink-0">
+                            <svg class="w-3 h-3 text-white/20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            <span class="text-[7px] text-white/20 font-medium">Paused</span>
+                        </div>
+                    </div>
+                ))}
 
-        <!-- RIGHT HALF: What you need — a workflow you can't have -->
-        <div class="w-1/2 flex flex-col items-center justify-center p-4 relative">
-            <!-- Label -->
-            <div class="absolute top-3 left-0 right-0 flex justify-center">
-                <span class="text-[8px] text-white/30 font-semibold uppercase tracking-[0.15em]">What you need</span>
-            </div>
-
-            <div class="w-full max-w-[190px] rounded-xl overflow-hidden border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.5)] relative">
-                <!-- Header -->
-                <div class="h-6 bg-[#252050] flex items-center gap-1.5 px-2 border-b border-white/5">
-                    <div class="w-1.5 h-1.5 rounded-full bg-red-500/60"></div>
-                    <div class="w-1.5 h-1.5 rounded-full bg-yellow-500/40"></div>
-                    <div class="w-1.5 h-1.5 rounded-full bg-green-500/30"></div>
-                    <span class="text-[6px] text-white/30 ml-1">Workflow Builder</span>
-                </div>
-                <!-- Workflow canvas with greyed-out nodes -->
-                <div class="bg-[#16133a] p-3 space-y-2 relative">
-                    <!-- Node 1: Trigger -->
-                    <div class="flex items-center gap-2">
-                        <div class="w-5 h-5 rounded bg-indigo-500/15 border border-indigo-500/20 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-3 h-3 text-indigo-400/40" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                        <div class="flex-1 h-5 rounded border border-dashed border-white/10 bg-white/[0.02] flex items-center px-2">
-                            <span class="text-[5.5px] text-white/20">Trigger: Daily at 9 AM</span>
-                        </div>
-                    </div>
-                    <!-- Connector line -->
-                    <div class="flex justify-center"><div class="w-px h-2 bg-white/10"></div></div>
-                    <!-- Node 2: Action -->
-                    <div class="flex items-center gap-2">
-                        <div class="w-5 h-5 rounded bg-green-500/15 border border-green-500/20 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-3 h-3 text-green-400/40" viewBox="0 0 24 24" fill="currentColor"><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-                        </div>
-                        <div class="flex-1 h-5 rounded border border-dashed border-white/10 bg-white/[0.02] flex items-center px-2">
-                            <span class="text-[5.5px] text-white/20">Post to all 50 profiles</span>
-                        </div>
-                    </div>
-                    <!-- Connector with branch -->
-                    <div class="flex justify-center gap-4">
-                        <div class="w-px h-2 bg-white/10"></div>
-                    </div>
-                    <!-- Node 3: Condition -->
-                    <div class="flex items-center gap-2">
-                        <div class="w-5 h-5 rounded bg-amber-500/15 border border-amber-500/20 flex items-center justify-center flex-shrink-0 rotate-45">
-                            <svg class="w-2.5 h-2.5 text-amber-400/40 -rotate-45" viewBox="0 0 24 24" fill="currentColor"><path d="M14 4l2.29 2.29-2.88 2.88 1.42 1.42 2.88-2.88L20 10V4zm-4 0H4v6l2.29-2.29 4.71 4.7V20h2v-8.41l-5.29-5.3z"/></svg>
-                        </div>
-                        <div class="flex-1 h-5 rounded border border-dashed border-white/10 bg-white/[0.02] flex items-center px-2">
-                            <span class="text-[5.5px] text-white/20">If reply → send follow-up</span>
-                        </div>
-                    </div>
-                    <!-- Connector -->
-                    <div class="flex justify-center"><div class="w-px h-2 bg-white/10"></div></div>
-                    <!-- Node 4: Loop -->
-                    <div class="flex items-center gap-2">
-                        <div class="w-5 h-5 rounded bg-purple-500/15 border border-purple-500/20 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-3 h-3 text-purple-400/40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
-                        </div>
-                        <div class="flex-1 h-5 rounded border border-dashed border-white/10 bg-white/[0.02] flex items-center px-2">
-                            <span class="text-[5.5px] text-white/20">Loop through CSV list</span>
-                        </div>
-                    </div>
-
-                    <!-- "Not available" overlay -->
-                    <div class="absolute inset-0 bg-[#16133a]/60 flex items-center justify-center rounded-b-xl">
-                        <div class="px-3 py-1.5 rounded-full bg-red-500/15 border border-red-500/25">
-                            <span class="text-[8px] text-red-400 font-bold uppercase tracking-wider">Not Available</span>
-                        </div>
-                    </div>
+                <!-- Footer — error banner -->
+                <div class="mx-3 my-2 px-2.5 py-2 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5 text-red-400 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                    <span class="text-[8px] text-red-400 font-bold">No parallel execution supported</span>
                 </div>
             </div>
         </div>

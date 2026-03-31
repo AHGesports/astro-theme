@@ -5,25 +5,29 @@ const features = [
     {
         title: "Mass Profile Orchestration",
         description: "Run your AI automation across hundreds of browser profiles simultaneously. Each profile has its own fingerprint, proxy, cookies, and identity — completely isolated. Scale from 1 to 1,000 profiles without changing a single workflow.",
-        image: "/Elyt/poster_11s.webp",
+        image: "/Elyt/images/browserprofiles.png",
         badge: "Scale",
     },
     {
-        title: "Anti-Detection + AI Humanizer",
-        description: "Elyt's AI humanizer generates realistic mouse movements, natural typing rhythms, random scroll patterns, and human-like pauses. Paired with anti-detect browsers, your automated sessions are indistinguishable from real users.",
-        image: "/Elyt/poster_14s.webp",
-        badge: "Stealth",
+        title: "AI Humanizer",
+        description: "Elyt's AI humanizer generates realistic mouse movements, natural typing rhythms, random scroll patterns, and human-like pauses. Your automated sessions behave like real users — so they last longer and work more reliably.",
+        image: "/Elyt/images/actions.png",
+        badge: "Reliability",
     },
     {
         title: "Visual Workflow System",
         description: "Build complex multi-step automations with a visual node editor. Chain AI actions, add conditional logic, pass data between steps, and schedule everything to run on autopilot. No coding required — describe each step in plain English.",
-        image: "/Elyt/poster_52s.webp",
+        image: "/Elyt/images/workflows.png",
         badge: "Power",
     },
 ];
 ---
 
-<div id="features" class="py-16">
+<div id="features" class="relative py-16">
+    <div aria-hidden="true" class="absolute inset-0 grid grid-cols-2 -space-x-52 opacity-[0.14] dark:opacity-[0.07]">
+        <div class="blur-[106px] h-56 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
+        <div class="blur-[106px] h-32 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
+    </div>
     <Container>
         <div class="text-center max-w-3xl mx-auto mb-12">
             <span class="text-sm font-medium uppercase tracking-widest text-secondary">Features</span>
@@ -31,7 +35,7 @@ const features = [
                 What makes Elyt different
             </h2>
             <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
-                The only platform that combines mass automation, anti-detection, and AI humanization in one tool.
+                The only platform that combines mass automation, AI humanization, and visual workflows in one tool.
             </p>
         </div>
 
@@ -43,11 +47,11 @@ const features = [
                 ]}>
                     <!-- Image -->
                     <div class="lg:w-1/2 mb-8 lg:mb-0">
-                        <div class="relative overflow-hidden rounded-3xl aspect-[4/3]">
+                        <div class="relative overflow-hidden rounded-3xl">
                             <img
                                 src={feature.image}
                                 alt={feature.title}
-                                class="w-full h-full object-cover"
+                                class="w-full h-auto rounded-3xl"
                                 loading="lazy"
                             />
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
@@ -70,48 +74,3 @@ const features = [
         </div>
     </Container>
 </div>
-
-<script>
-    import LeaderLine from "leader-line-new";
-
-    function initArrows() {
-        const cards = Array.from(document.querySelectorAll("[data-feature-card]"));
-        if (cards.length < 2) return;
-
-        // Only show on large screens
-        if (window.innerWidth < 1024) return;
-
-        for (let i = 0; i < cards.length - 1; i++) {
-            const start = cards[i];
-            const end = cards[i + 1];
-
-            // Even card: image is on left, so content is on right → exit right side
-            // Odd card: layout is reversed, content is on left → exit left side
-            const startSocket = i % 2 === 0 ? "right" : "left";
-
-            new LeaderLine(start, end, {
-                color: "rgba(99,102,241,0.55)",
-                size: 2.5,
-                path: "arc",
-                startSocket,
-                endSocket: "top",
-                endPlug: "arrow3",
-                endPlugSize: 1.8,
-                startPlugColor: "rgba(99,102,241,0.55)",
-                endPlugColor: "rgba(99,102,241,0.9)",
-                gradient: true,
-                startLabel: "",
-                endLabel: "",
-                startSocketGravity: 120,
-                endSocketGravity: 80,
-            });
-        }
-    }
-
-    // Wait for layout to settle before measuring positions
-    if (document.readyState === "complete") {
-        initArrows();
-    } else {
-        window.addEventListener("load", initArrows);
-    }
-</script>
