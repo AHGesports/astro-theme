@@ -1,8 +1,9 @@
 export const SITE = {
-    URL: "https://elyt.ai",
+    URL: "https://elyt-ai.com",
     TITLE: "Elyt",
-    DESCRIPTION: "AI browser automation at scale. Automate any website across hundreds of profiles without getting detected.",
-    EMAIL: "hello@elyt.ai",
+    TITLE_TEMPLATE: "Elyt - AI Browser Automation at Scale",
+    DESCRIPTION: "AI browser automation at scale. Automate any website across hundreds of profiles. Works with AdsPower, MoreLogin, GoLogin, and many more providers.",
+    OG_IMAGE: "/Elyt/images/poster.webp",
 };
 
 export const CONTACT = {

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://elyt-ai.com/sitemap.xml
