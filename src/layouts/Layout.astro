@@ -1,5 +1,7 @@
 ---
 import { AstroFont } from 'astro-font';
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import AppFooter from "../components/AppFooter.astro";
 import AppHeader from "../components/AppHeader.astro";
 import ContactModal from "../components/ContactModal.astro";
@@ -34,6 +36,8 @@ const ogImageUrl = new URL(SITE.OG_IMAGE, SITE.URL).toString();
         <meta name="twitter:title" content={SITE.TITLE_TEMPLATE} />
         <meta name="twitter:description" content={SITE.DESCRIPTION} />
         <meta name="twitter:image" content={ogImageUrl} />
+        <Analytics />
+        <SpeedInsights />
 
         <AstroFont
             config={[
